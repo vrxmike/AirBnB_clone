@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines the HBnB console."""
+"""HBnB program console."""
 import cmd
 import re
 from shlex import split
@@ -32,7 +32,7 @@ def parse(line):
 
 
 class HBNBCommand(cmd.Cmd):
-    """Defines the HolbertonBnB command interpreter.
+    """Class that displays the HBnB command interpreter.
 
     Attributes:
         prompt (str): The command prompt.
@@ -50,11 +50,11 @@ class HBNBCommand(cmd.Cmd):
     }
 
     def emptyline(self):
-        """Do nothing upon receiving an empty line."""
+        """Doesn't execute anything upon receiving an empty line."""
         pass
 
     def default(self, arg):
-        """Default behaviour for cmd module when input is invalid"""
+        """Handle a Default command for cmd module when input is invalid"""
         argdict = {
                 "all": self.do_all,
                 "show": self.do_show,
@@ -79,13 +79,13 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOQ(self, arg):
-        "EOQ signal to exit the program."""
+        "EOQ signal on console to exit the program (CTRL + D)."""
         print("")
         return True
 
     def do_create(self, arg):
         """Usage: create <class>
-        Create a new class instance and print its id.
+        Command to create a new class instance and print its id.
         """
         argl = parse(arg)
         if len(argl) == 0:
@@ -98,20 +98,22 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
-        Dispaly the string representation of a class instance of a given id.
-        """
-        argl = parse(arg)
-        objdict = storage.all()
-        if len(argl) == 0:
+        Dispaly the string representation of a class instance."""
+        args = shlex.split(args)
+        if args == []:
             print("** class name missing **")
-        elif argl[0] not in HBNBCommand.__classes:
+        elif args[0] not in ["Basemodel", "User", "Place", "State",
+                                "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
-        elif len(argl) == 1:
+        elif len(args) == 1:
             print("** instance id missing **")
-        elif "{}.{}".format(argl[0], argl[1]) not in objdict:
-            print("** no instance found **")
         else:
-            print(objdict["{}.{}".format(argl[0], argl[1])])
+            models.storage.reload()
+            for ins, obj in models.storage.all().items():
+                if obj.id == args[1] and obj.__class__.__name__ == args[0]:
+                    print(obj.__str__())
+                    return
+            print("** no instance found **")
 
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)

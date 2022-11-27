@@ -1,14 +1,14 @@
 #!/bin/bash/python3
-"""Defines the BaseModel class."""
+"""This script defines the BaseModel class."""
 from uuid import uuid4
 from datetime import datetime
-import models
+import models import storage
 
 
 class BaseModel:
     """
-        Represents the BaseModel class for all
-        objects in the AirBnb Clone project
+        Represents the BaseModel class from which all
+        classes will inherit
     """
 
     def __init__(self, *args, **kwargs):
@@ -43,7 +43,6 @@ class BaseModel:
         return dict_rep
 
     def __str__(self):
-        """Overriding the default str method to define the
-            string representation of the BaseModel class
-        """
+        """Returns the official string representation"""
+
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
