@@ -1,8 +1,8 @@
 #!/bin/bash/python3
 """This script defines the BaseModel class."""
+import models
 from uuid import uuid4
 from datetime import datetime
-import models import storage
 
 
 class BaseModel:
