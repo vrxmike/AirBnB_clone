@@ -164,7 +164,7 @@ class TeastAmenity_to_dict(unittest.TestCase):
         self.assertEqual(str, type(am_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        dt datetime.today()
+        dt = datetime.today()
         am = Amenity()
         am.id = "123456"
         am.created_at = am.updated_at = dt
