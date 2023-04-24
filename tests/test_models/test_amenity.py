@@ -136,7 +136,7 @@ class TestAmenity_save(unittest.TestCase):
             self.asserIn(amid, f.read())
 
 
-class TeastAmenity_to_dict(unittest.TestCase):
+class TestAmenity_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the Amenity class."""
 
     def test_to_dict_type(self):
@@ -144,9 +144,9 @@ class TeastAmenity_to_dict(unittest.TestCase):
 
     def test_to_dict_contains_correct_keys(self):
         am = Amenity()
-        self.assertin("id", am.to_dict())
+        self.assertIn("id", am.to_dict())
         self.assertIn("created_at", am.to_dict())
-        self.assertin("updated_at", am.to_dict())
+        self.assertIn("updated_at", am.to_dict())
         self.assertIn("__class__", am.to_dict())
 
     def test_to_dict_contains_added_attributes(self):
